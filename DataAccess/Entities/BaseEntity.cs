@@ -8,7 +8,7 @@ namespace DataAccess.Entities
     {
         public BaseEntity()
         {
-            this.CreatedTime = DateTime.Now;
+            this.CreatedAt = DateTime.Now;
             this.IsDeleted = false;
         }
 
@@ -20,8 +20,8 @@ namespace DataAccess.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("created_time")]
-        public DateTime CreatedTime { get; set; }
+        [BsonElement("created_at")]
+        public DateTime CreatedAt { get; set; }
 
         [BsonElement("created_by")]
         public String CreatedBy { get; set; }

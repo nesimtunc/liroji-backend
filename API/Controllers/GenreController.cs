@@ -13,32 +13,32 @@ namespace API.Controllers
     public class GenreController : Controller
     {
 
-        private readonly GenreManager genreManager;
+        private readonly GenreManager _genreManager;
 
         public GenreController(IConfiguration config)
         {
-            genreManager = new GenreManager(config);
+            _genreManager = new GenreManager(config);
         }
 
         // GET: api/values
         [HttpGet]
         public IEnumerable<Genre> Get()
         {
-            return genreManager.GetAll();
+            return _genreManager.GetAll();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public Genre Get(string id)
         {
-            return genreManager.GetById(id);
+            return _genreManager.GetById(id);
         }
 
         // POST api/values
         [HttpPost]
         public Genre Post([FromBody]Genre genre)
         {
-            return genreManager.Create(genre);
+            return _genreManager.Create(genre);
         }
 
         // PUT api/values/5
@@ -46,14 +46,14 @@ namespace API.Controllers
         public void Put(String id, [FromBody]Genre genre)
         {
             genre.Id = id;
-            genreManager.Update(genre);
+            _genreManager.Update(genre);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(String id)
         {
-            genreManager.Delete(id);
+            _genreManager.Delete(id);
         }
     }
 }

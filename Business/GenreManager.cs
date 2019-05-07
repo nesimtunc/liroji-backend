@@ -8,11 +8,11 @@ namespace Business
     public class GenreManager: IManager<Genre>
     {
 
-        private readonly DataAccess.Repository<DataAccess.Entities.Genre> repository;
+        private readonly DataAccess.Repository<DataAccess.Entities.Genre> _repository;
 
         public GenreManager(IConfiguration config)
         {
-            repository = new DataAccess.Repository<DataAccess.Entities.Genre>(config);
+            _repository = new DataAccess.Repository<DataAccess.Entities.Genre>(config);
         }
 
         public Genre Create(Genre model)
@@ -30,20 +30,20 @@ namespace Business
                 Name = model.Name,
                 CreatedBy = model.CreatedBy
             };
-            repository.Create(entity);
+            _repository.Create(entity);
             model.Id = entity.Id;
-            model.CreatedTime = entity.CreatedTime;
+            model.CreatedAt = entity.CreatedAt;
             return model;
         }
 
         public void Delete(string id)
         {
-            repository.Delete(id);
+            _repository.Delete(id);
         }
 
         public IEnumerable<Genre> GetAll()
         {
-            var entities = repository.GetAll();
+            var entities = _repository.GetAll();
             List<Genre> models = new List<Genre>();
             foreach (var item in entities)
             {
@@ -51,7 +51,7 @@ namespace Business
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    CreatedTime = item.CreatedTime,
+                    CreatedAt = item.CreatedAt,
                     CreatedBy = item.CreatedBy
                 });
             }
@@ -60,12 +60,12 @@ namespace Business
 
         public Genre GetById(string id)
         {
-            var genre = repository.GetById(id);
+            var genre = _repository.GetById(id);
             return new Genre
             {
                 Id = genre.Id,
                 Name = genre.Name,
-                CreatedTime = genre.CreatedTime,
+                CreatedAt = genre.CreatedAt,
                 CreatedBy = genre.CreatedBy
             };
         }
@@ -76,10 +76,10 @@ namespace Business
             {
                 Id = model.Id,
                 Name = model.Name,
-                CreatedTime = model.CreatedTime,
+                CreatedAt = model.CreatedAt,
                 CreatedBy = model.CreatedBy
             };
-            repository.Update(entity);
+            _repository.Update(entity);
         }
     }
 }

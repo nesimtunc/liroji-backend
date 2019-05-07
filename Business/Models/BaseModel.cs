@@ -16,8 +16,8 @@ namespace Business.Models
         /// <value>The identifier.</value>
         public string Id { get; set; }
 
-        [DataMember(Name = "created_time")]
-        public DateTime CreatedTime { get; set; }
+        [DataMember(Name = "created_at")]
+        public DateTime CreatedAt { get; set; }
 
         [DataMember(Name = "created_by", EmitDefaultValue = true)]
         public String CreatedBy { get; set; }

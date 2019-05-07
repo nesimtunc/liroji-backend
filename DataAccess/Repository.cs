@@ -9,19 +9,19 @@ namespace DataAccess
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
 
-        private readonly IMongoCollection<T> db;
+        private readonly IMongoCollection<T> _db;
 
         public Repository(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("mongodb"));
             var database = client.GetDatabase("liroji");
-            db = database.GetCollection<T>(typeof(T).Name.ToLower());
+            _db = database.GetCollection<T>(typeof(T).Name.ToLower());
         }
 
 
         public T Create(T entity)
         {
-            db.InsertOne(entity);
+            _db.InsertOne(entity);
             return entity;
         }
 
@@ -35,17 +35,17 @@ namespace DataAccess
 
         public IEnumerable<T> GetAll()
         {
-            return db.Find(item => item.IsDeleted == false).ToList();
+            return _db.Find(item => item.IsDeleted == false).ToList();
         }
 
         public T GetById(string id)
         {
-            return db.Find(item => item.IsDeleted == false && item.Id == id).First();
+            return _db.Find(item => item.IsDeleted == false && item.Id == id).First();
         }
 
         public void Update(T entity)
         {
-            db.FindOneAndReplace(item => item.Id == entity.Id, entity);
+            _db.FindOneAndReplace(item => item.Id == entity.Id, entity);
         }
     }
 }
