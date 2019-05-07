@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Business;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +45,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public void Put(String id, [FromBody]Genre genre)
         {
+            genre.Id = id;
             genreManager.Update(genre);
         }
 

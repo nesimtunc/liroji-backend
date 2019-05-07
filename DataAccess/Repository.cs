@@ -27,7 +27,10 @@ namespace DataAccess
 
         public void Delete(string id)
         {
-            db.DeleteOne(id);
+            var item = GetById(id);
+            item.IsDeleted = true;
+            Update(item);
+            // db.FindOneAndDelete(i => i.Id == id); // will delete from db
         }
 
         public IEnumerable<T> GetAll()

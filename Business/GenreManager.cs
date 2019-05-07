@@ -38,7 +38,7 @@ namespace Business
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            repository.Delete(id);
         }
 
         public IEnumerable<Genre> GetAll()
@@ -60,12 +60,26 @@ namespace Business
 
         public Genre GetById(string id)
         {
-            throw new NotImplementedException();
+            var genre = repository.GetById(id);
+            return new Genre
+            {
+                Id = genre.Id,
+                Name = genre.Name,
+                CreatedTime = genre.CreatedTime,
+                CreatedBy = genre.CreatedBy
+            };
         }
 
         public void Update(Genre model)
         {
-            throw new NotImplementedException();
+            DataAccess.Entities.Genre entity = new DataAccess.Entities.Genre
+            {
+                Id = model.Id,
+                Name = model.Name,
+                CreatedTime = model.CreatedTime,
+                CreatedBy = model.CreatedBy
+            };
+            repository.Update(entity);
         }
     }
 }
